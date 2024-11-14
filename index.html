@@ -3,41 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio de Nathan VALENTIN</title>
-    <link rel="stylesheet" href="index.css">
+    <title>Sheeepix Studios - Portfolio de Nathan VALENTIN</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1>Bienvenue sur mon Portfolio</h1>
+        <h1>Sheeepix Studios</h1>
         <nav>
             <a href="#about">À propos</a>
-            <a href="#projects">Projets</a>
+            <a href="#games">Jeux</a>
             <a href="#contact">Contact</a>
         </nav>
     </header>
 
-    <section id="about">
-        <h2>Qui suis-je?</h2>
-        <p>Bonjour ! Je suis Nathan VALENTIN, un développeur passionné spécialisé dans la création de jeux mobiles pour iOS. Avec une solide expérience en programmation, je m'efforce de créer des expériences ludiques et engageantes.</p>
-        <p>En tant que fondateur de Sheeepix Studios, j'ai l'opportunité de travailler sur plusieurs projets passionnants.</p>
+    <section id="about" class="about">
+        <h2>À propos de moi</h2>
+        <p>Je suis Nathan VALENTIN, le fondateur de Sheeepix Studios. Ici, nous pensons qu'un bon jeu doit rester simple tout en captivant l'utilisateur par des détails créatifs.</p>
+        <p><span class="anecdote" data-anecdote="Le nom Sheeepix cache un jeu de mots subtil...">Découvre le secret de notre nom</span> et plonge dans notre vision des jeux.</p>
     </section>
 
-    <section id="projects">
-        <h2>Mes Projets</h2>
-        <p>Tous mes projets ont été développés dans le cadre de mon entreprise, Sheeepix Studios où je me consacre à la création de jeux mobiles "simples" ou plus ambitieux</p>
-        <ul>
-            <li><strong>Casse-brique</strong> - Mon type de jeu préféré de mon enfance. Je ne pouvais pas ne pas commencer par créer ce petit jeu.</li>
-            <li><strong>Demibomb: Mission Tactique</strong> - Le premier jeu que j'ai appris à développer avant de commencer ma carrière. Afin de rajouter plus de fun, j'ai également ajouté de nouveaux modes de ce jeu. Et peut-être, pour plus tard un mode histoire, pourquoi pas 😉</li>
-        </ul>
+    <section id="games" class="games">
+        <h2>Nos jeux</h2>
+        <p>Nos jeux sont conçus pour être simples, mais captivants, avec des univers détaillés, des modes de jeux variés, et parfois même une histoire riche pour les plus ambitieux d'entre eux.</p>
+        <button class="btn">Découvrir notre portfolio</button>
     </section>
 
     <section id="contact">
         <h2>Contact</h2>
-        <p>Vous pouvez me contacter via <a href="mailto:nathan.valentin@laposte.net">email</a></p>
+        <p>Envie de discuter d'un projet, de poser une question ou de découvrir les coulisses de Sheeepix Studios ?</p>
+        <p>Vous pouvez me contacter par <a href="mailto:nathan.valentin@laposte.net">email</a></p>
     </section>
 
     <footer>
         <p>&copy; 2024 Nathan VALENTIN. Tous droits réservés.</p>
     </footer>
+    <script>
+        function revealSections() {
+            const sections = document.querySelectorAll('section');
+            const windowHeight = window.innerHeight;
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                if (sectionTop < windowHeight - 250 && sectionTop > 250) {
+                    section.classList.add('show');
+                } else {
+                    section.classList.remove('show')
+                }
+            });
+        }
+
+        window.addEventListener('scroll', revealSections);
+
+        revealSections();
+    </script>
+    <script>
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                window.scrollTo({
+                    top: targetSection.offsetTop - 250,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
