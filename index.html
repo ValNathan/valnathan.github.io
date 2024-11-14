@@ -31,11 +31,44 @@
         <button class="btn">Découvrir notre portfolio</button>
     </section>
 
-    <section id="contact">
+    <section id="contact" class="contact">
         <h2>Contact</h2>
         <p>Envie de discuter d'un projet, de poser une question ou de découvrir les coulisses de Sheeepix Studios ?</p>
         <p>Vous pouvez me contacter par <a href="mailto:nathan.valentin@laposte.net">email</a></p>
     </section>
+
+    <div id="portfolioModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Notre portfolio</h2>
+            <p>Découvrez nos jeux et plongez dans les univers que nous avons créés.</p>
+
+            <div class="carousel-container">
+                <button class="carousel-button prev-button">&laquo;</button>
+                <div class="game-gallery">
+                    <div class="game-item">
+                        <img src="" alt="image" />
+                        <h3>Casse-briques</h3>
+                        <p>Un jeu de Casse-briques qui m'a permis de me faire la main avec Swift.</p>
+                    </div>
+                    <div class="game-item">
+                        <img src="" alt="image" />
+                        <h3>DémiBomb: Mission Tactique</h3>
+                        <p>Un jeu de démineur avec différents modes de jeux disponibles, comme le mode désamorçage ou le mode Trésor. Et pourquoi pas, bientôt un mode Histoire.</p>
+                        <p>bientôt disponible sur l'App Store</p>
+                    </div>
+                    <div class="game-item">
+                        <img src="" alt="image" />
+                        <h3>DémiBomb: Mission Tactique</h3>
+                        <p>Un jeu de démineur avec différents modes de jeux disponibles, comme le mode désamorçage ou le mode Trésor. Et pourquoi pas, bientôt un mode Histoire.</p>
+                        <p>bientôt disponible sur l'App Store</p>
+                    </div>
+                </div>
+                <button class="carousel-button next-button">&raquo;</button>
+            </div>
+            
+        </div>
+    </div>
 
     <footer>
         <p>&copy; 2024 Nathan VALENTIN. Tous droits réservés.</p>
@@ -43,10 +76,12 @@
     <script>
         function revealSections() {
             const sections = document.querySelectorAll('section');
+            const header = document.querySelector('header');
+            const headerBottom = header.getBoundingClientRect().bottom;
             const windowHeight = window.innerHeight;
             sections.forEach(section => {
                 const sectionTop = section.getBoundingClientRect().top;
-                if (sectionTop < windowHeight - 250 && sectionTop > 250) {
+                if (sectionTop < windowHeight - 100 && sectionTop >= headerBottom - 50) {
                     section.classList.add('show');
                 } else {
                     section.classList.remove('show')
@@ -69,6 +104,48 @@
                     behavior: 'smooth'
                 });
             });
+        });
+    </script>
+    <script>
+        const portfolioModal = document.getElementById('portfolioModal');
+        const openModalButton = document.querySelector('.games .btn');
+        const closeButton = document.querySelector('.close-button');
+
+        openModalButton.addEventListener('click', () => {
+            portfolioModal.style.display = 'flex';
+        });
+
+        closeButton.addEventListener('click', () => {
+            portfolioModal.style.display = 'none';
+        });
+
+        window.addEventListener('click', () => {
+            if (event.target === portfolioModal) {
+                portfolioModal.style.display = 'none';
+            }
+        });
+    </script>
+    <script>
+        const gameGallery = document.querySelector('.game-gallery');
+        const gameItems = document.querySelectorAll('.game-item');
+        const prevButton = document.querySelector('.prev-button');
+        const nextButton = document.querySelector('.next-button');
+
+        let currentIndex = 0;
+
+        function updateCarousel() {
+            const offset = -currentIndex * 100;
+            gameGallery.style.transform = `translateX(${offset}%)`;
+        }
+
+        nextButton.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % gameItems.length;
+            updateCarousel();
+        });
+
+        prevButton.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + gameItems.length) % gameItems.length;
+            updateCarousel();
         });
     </script>
 </body>
