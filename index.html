@@ -247,7 +247,8 @@
         function openPrivacyModal() {
             document.getElementById('privacyModal').style.display = 'block';
 
-            if (window.location.hash !== '#privacy') {
+            const params = new URLSearchParams(window.location.search);
+            if (!params.has('privacy') && window.location.hash !== '#privacy') {
                 window.location.hash = 'privacy';
             }
         }
@@ -255,7 +256,9 @@
         function closePrivacyModal() {
             document.getElementById('privacyModal').style.display = 'none';
 
-            if (window.location.hash === '#privacy') {
+            const params = new URLSearchParams(window.location.search);
+
+            if (!params.has('privacy') && window.location.hash === '#privacy') {
                 history.pushState("", document.title, window.location.pathname);
             }
         }
