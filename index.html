@@ -231,12 +231,33 @@
         });
     </script>
     <script>
+        function checkUrlAndOpenModal() {
+            const hash = window.location.hash;
+            const params = new URLSearchParams(window.location.search);
+
+            if (hash == '#privacy' || params.has('privacy')) {
+                openPrivacyModal();
+
+                const game = params.get('game');
+                if (game) {
+                    showTab(game);
+                }
+            }
+        }
         function openPrivacyModal() {
             document.getElementById('privacyModal').style.display = 'block';
+
+            if (window.location.hash !== '#privacy') {
+                window.location.hash = 'privacy';
+            }
         }
 
         function closePrivacyModal() {
             document.getElementById('privacyModal').style.display = 'none';
+
+            if (window.location.hash === '#privacy') {
+                history.pushState("", document.title, window.location.pathname);
+            }
         }
 
         function showTab(tabId) {
@@ -250,7 +271,7 @@
 
             document.getElementById(tabId).classList.add('active');
 
-            event.target.classList.add('active');
+            document.querySelector(`.tab-button[onclick="showTab('${tabId}')"]`).classList.add('active');
         }
 
         window.onclick = function(event) {
@@ -258,6 +279,10 @@
                 closePrivacyModal();
             }
         }
+
+        document.addEventListener('DOMContentLoaded', checkUrlAndOpenModal);
+
+        window.addEventListener('hashchange', checkUrlAndOpenModal);
     </script>
 </body>
 </html>
