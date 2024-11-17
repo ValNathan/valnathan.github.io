@@ -70,8 +70,90 @@
         </div>
     </div>
 
+    <div id="privacyModal" class="privacy-modal">
+        <div class="privacy-modal-content">
+            <span class="close" onclick="closePrivacyModal()">&times;</span>
+
+            <h1>Politique de Confidentialité - Sheeepix Studios</h1>
+
+            <div class="tab-container">
+                <div class="tab-buttons">
+                    <button class="tab-button active" onclick="showTab('general')">Général</button>
+                    <button class="tab-button" onclick="showTab('demibomb')">DémiBomb</button>
+                </div>
+
+                <div id="general" class="tab-content active">
+                    <h2>Politique Générale</h2>
+                    <p>Bonjour ! Je suis Nathan VALENTIN, développeur des jeux et applications sous la marque Sheeepix Studios. Cette politique explique simplement comment votre vie privée est protégée quand vous utilisez mes applications.</p>
+                </div>
+
+                <div id="demibomb" class="tab-content">
+                    <h2>DémiBomb: Mission Tactique</h2>
+                    <div>
+                        <h3>Ce que vous devez savoir</h3>
+                        <ol>
+                            <li>Le jeu en lui-même
+                                <ul>
+                                    <li>Vos scores et paramètres sont sauvegardés uniquement sur votre appareil</li>
+                                    <li>Vous pouvez les effacer en désinstallant l'application</li>
+                                </ul>
+                            </li>
+                            <li>Les publicités
+                                <ul>
+                                    <li>J'utilise Google AdMob pour afficher des publicités</li>
+                                    <li>Les publicités peuvent être désactivées en achetant la version Premium</li>
+                                    <li>Google AdMob peut collecter des données anonymes pour les publicités</li>
+                                    <li>Vous pouvez désactiver la personnalisation des pubs dans les paramètres de votre appareil.</li>
+                                </ul>
+                            </li>
+                            <li>Les achats
+                                <ul>
+                                    <li>Les achats Premium sont gérés par Apple</li>
+                                    <li>Je n'ai accès à aucune de vos informations bancaires</li>
+                                    <li>Le statut Premium est lié à votre compte Apple</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </div>
+                    <div>
+                        <h3>Protection des enfants</h3>
+                        <ul>
+                            <li>Le jeu est conçu pour tous les âges</li>
+                            <li>Je ne collecte aucune information personnelle</li>
+                            <li>Les publicités sont adaptées à tout public</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Vos droits</h3>
+                        <ul>
+                            <li>Vous pouvez demander des informations sur vos données à tout moment</li>
+                            <li>Vous pouvez désactiver les publicités personnalisées</li>
+                            <li>Vous avez le contrôle total de vos données</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Contact</h3>
+                        <p>Pour toute question sur votre vie privée ou sur le jeu en général :</p>
+                        <ul>
+                            <li>email : </li>
+                            <li>LinkedIn : </li>
+                            <li>Instagram : </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3>Modifications</h3>
+                        <p>Si cette politique change, vous en serez informé dans une mise à jour de l'application.</p>
+                    </div>
+                    <hr />
+                    <p>Cette politique est conforme au RGPD (Europe) et aux règles de l'App Store.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <p>&copy; 2024 Nathan VALENTIN. Tous droits réservés.</p>
+        <a class="privacy-link" onclick="openPrivacyModal()">Politique de confidentialité</a>
     </footer>
     <script>
         function revealSections() {
@@ -147,6 +229,35 @@
             currentIndex = (currentIndex - 1 + gameItems.length) % gameItems.length;
             updateCarousel();
         });
+    </script>
+    <script>
+        function openPrivacyModal() {
+            document.getElementById('privacyModal').style.display = 'block';
+        }
+
+        function closePrivacyModal() {
+            document.getElementById('privacyModal').style.display = 'none';
+        }
+
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+
+            document.getElementById(tabId).classList.add('active');
+
+            event.target.classList.add('active');
+        }
+
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('privacyModal')) {
+                closePrivacyModal();
+            }
+        }
     </script>
 </body>
 </html>

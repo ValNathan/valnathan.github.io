@@ -216,3 +216,79 @@ nav a:hover {
 .carousel-button:hover {
     background-color: var(--hover-color);
 }
+
+.privacy-link {
+    color: #666;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.privacy-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 100;
+}
+
+.privacy-modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 800px;
+    max-height: 80vh;
+    overflow-y: auto;
+    border-radius: 8px;
+}
+
+.close {
+    position: sticky;
+    top: 0;
+    float: right;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    background: #fefefe;
+    padding: 0 10px;
+}
+
+.close:hover {
+    color: black;
+}
+
+.tab-container {
+    margin-top: 20px;
+}
+
+.tab-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tab-button {
+    padding: 10px 20px;
+    border: none;
+    background: #eee;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.tab-button.active {
+    background: #007aff;
+    color: white;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
