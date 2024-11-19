@@ -151,9 +151,74 @@
         </div>
     </div>
 
+    <div id="supportModal" class="privacy-modal">
+        <div class="privacy-modal-content">
+            <span class="close" onclick="closeSupportModal()">&times;</span>
+
+            <h1>Support - Sheeepix Studios</h1>
+
+            <div class="tab-container">
+                <div class="tab-buttons">
+                    <button class="tab-button active" onclick="showSupportTab('general')">Général</button>
+                    <button class="tab-button" onclick="showSupportTab('demibomb')">DémiBomb</button>
+                </div>
+
+                <div id="support-general" class="tab-content active">
+                    <h2>Support Général</h2>
+                    <h3>Foire Aux Questions</h3>
+                    <div class="faq-section">
+                        <p><strong>Q: Comment contacter le support ? </strong></p>
+                        <p>R: Vous pouvez nous contacter par email à l'adresse suivante : sheeepix@gmail.com</p>
+                        <p><strong>Q: Où trouver les jeux proposés ?</strong></p>
+                        <p>R: Tous nos jeux sont disponibles sur l'App Store pour iOS.</p>
+                    </div>
+                </div>
+
+                <div id="support-demibomb" class="tab-content">
+                    <h2>DémiBomb: Mission Tactique</h2>
+                    <h3>Guide de jeu</h3>
+                    <div class="game-guide">
+                        <p><strong>Modes de jeu :</strong></p>
+                        <ul>
+                            <li>Mode Classique : Repérez et marquez toutes les mines</li>
+                            <li>Mode Désamorçage : Contre la montre ! Déminez avant la fin du temps imparti</li>
+                            <li>Mode Trésor : Trouvez le trésor caché pour gagner (Premium seulement)</li>
+                        </ul>
+
+                        <p><strong>Niveaux de difficulté :</strong></p>
+                        <ul>
+                            <li>Recrue : 9x9 cases, 10 mines (1 minute en mode Désamorçage)</li>
+                            <li>Sergent : 16x16 cases, 40 mines (3 minutes en mode Désamorçage)</li>
+                            <li>Général : 20x20 cases, 99 mines (5 minutes en mode Désamorçage) (Premium seulement)</li>
+                        </ul>
+                    </div>
+
+                    <h3>Problèmes fréquents</h3>
+                    <div class="troubleshooting">
+                        <p><strong>Q: J'ai acheté le pass Premium à vie (Vétéran) mais j'ai changé d'appareil iOS. Comment restaurer mon achat ?</strong></p>
+                        <p>R: Accédez à la boutique et utilisez le bouton "Restaurer les achats"</p>
+                        <p><strong>Q: Les publicités ne se chargent pas ?</strong></p>
+                        <p>R: Si vous avez un pass Premium, vous n'avez pas de publicités. Sinon, vérifiez votre connexion Internet et redémarrez l'application</p>
+                    </div>
+
+                    <h3>Nous contacter</h3>
+                    <div class="contact-section">
+                        <p>Pour tout autre problème ou suggestion, contactez-nous :</p>
+                        <ul>
+                            <li>par Email : sheeepix@gmail.com</li>
+                            <li>par LinkedIn : </li>
+                            <li>par Instagram : </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <p>&copy; 2024 Nathan VALENTIN. Tous droits réservés.</p>
         <a class="privacy-link" onclick="openPrivacyModal()">Politique de confidentialité</a>
+        <span class="privacy-link" onclick="openSupportModal()">Support</span>
     </footer>
     <script>
         function revealSections() {
@@ -286,6 +351,57 @@
         document.addEventListener('DOMContentLoaded', checkUrlAndOpenModal);
 
         window.addEventListener('hashchange', checkUrlAndOpenModal);
+    </script>
+    <script>
+        function openSupportModal() {
+            document.getElementById('supportModal').style.display = 'block';
+            const params = new URLSearchParams(window.location.search);
+            if (!params.has('support')) {
+                window.location.hash = 'support';
+            }
+        }
+
+        function closeSupportModal() {
+            document.getElementById('supportModal').style.display = 'none';
+            const params = new URLSearchParams(window.location.search);
+            if (!params.has('support') && window.location.hash === '#support') {
+                history.pushState("", document.title, window.location.pathname);
+            }
+        }
+
+        function showSupportTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            document.getElementById('support-' + tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const hash = window.location.hash;
+            const params = new URLSearchParams(window.location.search);
+            if (hash === '#support' || params.has('support')) {
+                openSupportModal();
+                if (params.has('game')) {
+                    showSupportTab(params.get('game'));
+                }
+            }
+        });
+
+        window.addEventListener('hashchange', function() {
+            if (window.location.hash !== '#support') {
+                closeSupportModal();
+            }
+        });
+
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('supportModal')) {
+                closeSupportModal();
+            }
+        }
     </script>
 </body>
 </html>
