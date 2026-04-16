@@ -119,9 +119,16 @@ m701 -113 c733 -58 1457 -317 1986 -711 131 -98 373 -340 456 -457 342 -483
 -10 61 -24 113 -32 117 -21 14 -54 10 -69 -7z" />
                 </g>
             </svg>
-            <nav>
+            <button id="burger-btn" class="burger-menu" aria-label="Ouvrir le menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <nav id="nav-menu">
                 <a href="#about">À propos</a>
                 <a href="#games">Nos créations</a>
+                <a href="#future">Prochainement</a>
+                <a href="#partners">Partenaires</a>
                 <a href="#contact">Contact</a>
                 <button id="theme-toggle" class="theme-toggle" aria-label="Changer le thème">
                     <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -205,9 +212,43 @@ m701 -113 c733 -58 1457 -317 1986 -711 131 -98 373 -340 456 -457 342 -483
             </div>
         </section>
 
+        <section id="future" class="games">
+            <h2 class="section-title">Projets à venir</h2>
+            <div class="games-grid">
+                <div class="game-card">
+                    <!--<div class="game-icon-placeholder">🚧</div>-->
+                    <img src="calculock-logo.png" />
+                    <h3>CalcuLock</h3>
+                    <p>Une nouvelle calculatrice tout à fait ordinaire, mais qui garde bien ses secrets</p>
+
+                    <div style="margin-top: auto; padding-top: 15px;">
+                        <span class="badge">En développement</span>
+                    </div>
+                    <a href="https://www.onparticipe.fr/c/iuGIWlee" target="_blank" class="download-btn">Découvrir le
+                        projet</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="partners" class="games">
+            <h2 class="section-title">Applications partenaires</h2>
+            <p style="text-align: center; color: var(--text-muted); margin-bottom: 40px; margin-top: -30px;">
+                Des projets sur-mesure développés à la demande pour d'autres créateurs et entreprises.
+            </p>
+            <div class="games-grid">
+                <div class="game-card">
+                    <img src="vocalyse_logo.png" />
+                    <h3>Vocalyse</h3>
+                    <p>Outil conçu pour toutes celles et ceux qui souhaitent apprendre à chanter et à placer leurs voix
+                    </p>
+                    <!--<a href="#" target="_blank" class="download-btn">Découvrir le projet</a>-->
+                </div>
+            </div>
+        </section>
+
         <section id="contact" class="contact">
             <h2 class="section-title">Travaillons ensemble</h2>
-            <p>Une question sur nos jeux ? Un projet de développement iOS ? N'hésitez pas à nous contacter.</p>
+            <p>Une question sur nos applications ? Un projet à développer ? N'hésitez pas à nous contacter.</p>
             <a href="mailto:sheeepix@gmail.com" class="btn-primary">Envoyer un message</a>
         </section>
     </main>
@@ -792,6 +833,22 @@ m701 -113 c733 -58 1457 -317 1986 -711 131 -98 373 -340 456 -457 342 -483
             if (event.target == document.getElementById('privacyModal')) closePrivacyModal();
             if (event.target == document.getElementById('supportModal')) closeSupportModal();
         }
+    </script>
+    <script>
+        const burgerBtn = document.getElementById('burger-btn');
+        const navMenu = document.getElementById('nav-menu');
+
+        burgerBtn.addEventListener('click', () => {
+            burgerBtn.classList.toggle('active');
+            navMenu.classList.toggle('open');
+        });
+
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                burgerBtn.classList.remove('active');
+                navMenu.classList.remove('open');
+            });
+        });
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6307267842430372"
         crossorigin="anonymous"></script>
